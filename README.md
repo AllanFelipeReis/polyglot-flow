@@ -55,9 +55,3 @@ cd polyglot-flow
 docker-compose up -d
 
 ```
-
-## 📈 Roadmap
-
-* [ ] Implementação de Testes de Integração entre serviços.
-* [ ] Adição de Keycloak para Auth centralizada.
-* [ ] Dashboard em tempo real com WebSockets no PHP.

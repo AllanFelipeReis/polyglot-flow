@@ -62,12 +62,16 @@ services:
   # PYTHON: Intelligence Service
   analytics-service:
     build: ./analytics-service
-    container_name: analytics-service
+    container_name: pf-python-analytics
     environment:
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq/
+      - DB_HOST=postgres-db
+      - DB_NAME=polyglot_db
+      - DB_USER=admin
+      - DB_PASS=password123
     depends_on:
-      rabbitmq:
-        condition: service_healthy
+      - rabbitmq
+      - postgres-db
     networks:
       - polyglot-net
 
@@ -81,7 +85,7 @@ services:
       - ./customer-portal:/var/www/html
     environment:
       - APP_ENV=local
-      - APP_KEY=base64:$(openssl rand -base64 32) # Ou gere depois com php artisan key:generate
+      - APP_KEY=base64:0oTb4vtktWJQ1cCQCE/faLuvu1Cg+HV0MN3UZrUjCYs=
       - ORDER_SERVICE_URL=http://order-service:8080
       - REDIS_HOST=pf-redis
     networks:
